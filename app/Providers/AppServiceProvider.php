@@ -8,9 +8,6 @@ use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
-    if ($this->app->environment() == 'production') {
-        URL::forceScheme('https');
-    }
     /**
      * Bootstrap any application services.
      *
@@ -28,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment() == 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
