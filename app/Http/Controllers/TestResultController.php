@@ -11,8 +11,8 @@ class TestResultController extends Controller
     {
     	$rs = DB::table('test_result')
                 ->select('test_result.id', 'tanggal_tr', 'kode_channel', 'frekuensi', 'program', 'rf_level', 'level_tr', 'cnr_tr', 'audio_level')
-                ->join('catv_channel', 'test_result.id_channel', 'catv_channel.id')
-                ->join('program', 'catv_channel.id', 'program.id_channel')
+                ->join(DB::raw("catv_channel"), DB::raw("test_result.id_channel"), DB::raw("="), DB::raw("catv_channel.id"))
+                ->join(DB::raw("program"), DB::raw("catv_channel.id"), DB::raw("="), DB::raw("program.id_channel"))
                 ->get();
         return view('transaksi.test_result', ['rs' => $rs]);
     }
